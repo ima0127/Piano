@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano</title>
+    <link rel="stylesheet" href="stylep.css">
+</head>
+<body>
+    <div class="piano">
+        <div class="box">
+            <div onclick="nota(46.249)" class="negra v"></div>
+            <div onclick="nota(51.913)" class="negra2 v"></div>
+            <div onclick="nota(58.270)" class="negra3 v"></div>
+            <div onclick="nota(69.296)" class="negra4 v"></div>
+            <div onclick="nota(77.782)" class="negra5 v"></div>
+        </div> 
+        <div onclick="nota(43.654)" class="blancas"></div>
+        <div onclick="nota(48.999)" class="blancas"></div>
+        <div onclick="nota(55.000)" class="blancas"></div>
+        <div onclick="nota(61.735)" class="blancas"></div>
+        <div onclick="nota(65.406)" class="blancas"></div>
+        <div onclick="nota(73.416)" class="blancas"></div>
+        <div onclick="nota(82.407)" class="blancas"></div>
+    </div>
+    <script>
+let context = new (window.AudioContext || window.webkitAudioContext)();
+
+function nota(frecuencia) {
+    let o = context.createOscillator();
+    let g = context.createGain();
+    
+    o.connect(g);
+    o.type = "sawtooth";
+    o.frequency.value = frecuencia;
+    g.connect(context.destination);
+    
+    o.start(0);
+    g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1.5);
+}
+
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
